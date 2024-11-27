@@ -13,12 +13,14 @@ import { getMongoConfig } from './configs/mongo.config';
 
 @Module({
 	imports: [
+		ConfigModule.forRoot({
+			isGlobal: true,
+		}),
 		MongooseModule.forRootAsync({
 			imports: [ConfigModule],
 			inject: [ConfigService],
 			useFactory: getMongoConfig,
 		}),
-		// 'mongodb://localhost:27017'
 		AuthModule,
 		TopPageModule,
 		ProductModule,

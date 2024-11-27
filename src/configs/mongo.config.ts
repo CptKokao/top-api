@@ -2,6 +2,8 @@ import { ConfigService } from '@nestjs/config';
 import { MongooseModuleOptions } from '@nestjs/mongoose';
 
 export const getMongoConfig = async (configService: ConfigService): Promise<MongooseModuleOptions> => {
+	console.log(configService.get('MONGO_LOGIN'));
+
 	return {
 		uri: getMongoString(configService),
 		...getMongoOptions(),
@@ -19,6 +21,5 @@ const getMongoString = (configService: ConfigService) => {
 };
 const getMongoOptions = () => ({
 	useNewUrlParser: true,
-	useCreateIndex: true,
 	useUnifiedTopology: true,
 });
