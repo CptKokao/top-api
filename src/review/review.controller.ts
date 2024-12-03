@@ -1,4 +1,13 @@
-import { Body, Controller, Delete, Get, HttpException, HttpStatus, Param, Post } from '@nestjs/common';
+import {
+	Body,
+	Controller,
+	Delete,
+	Get,
+	HttpException,
+	HttpStatus,
+	Param,
+	Post,
+} from '@nestjs/common';
 import { CreateReviewDto } from './dto/create-review.dto';
 import { ReviewService } from './review.service';
 import { REVIEW_NOT_FOUND } from './review.constants';
@@ -21,7 +30,7 @@ export class ReviewController {
 	}
 
 	@Get('byProduct/:productId')
-	async getByProduct(@Param('id') id: string) {
+	async getByProduct(@Param('productId') id: string) {
 		return this.reviewService.findByProductId(id);
 	}
 }

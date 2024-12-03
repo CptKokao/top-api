@@ -1,7 +1,9 @@
 import { ConfigService } from '@nestjs/config';
 import { MongooseModuleOptions } from '@nestjs/mongoose';
 
-export const getMongoConfig = async (configService: ConfigService): Promise<MongooseModuleOptions> => {
+export const getMongoConfig = async (
+	configService: ConfigService,
+): Promise<MongooseModuleOptions> => {
 	console.log(configService.get('MONGO_LOGIN'));
 
 	return {
