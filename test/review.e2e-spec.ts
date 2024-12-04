@@ -42,6 +42,19 @@ describe('AppController (e2e)', () => {
 		}
 	});
 
+	it('/review/create (POST) - fail', async () => {
+		try {
+			const response = await request(app.getHttpServer())
+				.post('/review/create')
+				.send({ ...testDto, rating: 0 });
+
+			expect(response.status).toBe(400);
+		} catch (error) {
+			console.error('Ошибка в тесте:', error);
+			throw error;
+		}
+	});
+
 	it('/review/byProduct/:productId (GET)', async () => {
 		try {
 			const response = await request(app.getHttpServer()).get(
