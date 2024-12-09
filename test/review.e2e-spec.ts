@@ -13,9 +13,15 @@ const testDto = {
 	productId,
 };
 
+const loginDto = {
+	login: 'test@test.ru',
+	password: '1234',
+};
+
 describe('AppController (e2e)', () => {
 	let app: INestApplication;
 	let createId: string;
+	let token: string;
 
 	beforeEach(async () => {
 		const moduleFixture: TestingModule = await Test.createTestingModule({
@@ -24,6 +30,12 @@ describe('AppController (e2e)', () => {
 
 		app = moduleFixture.createNestApplication();
 		await app.init();
+
+		const { body } = await request(app.getHttpServer())
+			.post('/auth/login')
+			.send(loginDto);
+
+		token = body.access_token;
 	});
 
 	it('/review/create (POST)', async () => {
@@ -57,9 +69,9 @@ describe('AppController (e2e)', () => {
 
 	it('/review/byProduct/:productId (GET)', async () => {
 		try {
-			const response = await request(app.getHttpServer()).get(
-				'/review/byProduct/' + productId,
-			);
+			const response = await request(app.getHttpServer())
+				.get('/review/byProduct/' + productId)
+				.set('Authorization', 'Bearer ' + token);
 
 			expect(response.status).toBe(200);
 			const { body } = response;
@@ -72,9 +84,9 @@ describe('AppController (e2e)', () => {
 
 	it('/review/:id (DELETE)', async () => {
 		try {
-			const response = await request(app.getHttpServer()).delete(
-				'/review/' + createId,
-			);
+			const response = await request(app.getHttpServer())
+				.delete('/review/' + createId)
+				.set('Authorization', 'Bearer ' + token);
 
 			expect(response.status).toBe(200);
 		} catch (error) {
