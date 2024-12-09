@@ -7,6 +7,7 @@ import {
 	HttpStatus,
 	Param,
 	Post,
+	UseGuards,
 	UsePipes,
 	ValidationPipe,
 } from '@nestjs/common';
@@ -32,6 +33,7 @@ export class ReviewController {
 		}
 	}
 
+	@UseGuards()
 	@Get('byProduct/:productId')
 	async getByProduct(@Param('productId') id: string) {
 		return this.reviewService.findByProductId(id);
