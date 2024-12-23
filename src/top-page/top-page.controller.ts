@@ -80,10 +80,10 @@ export class TopPageController {
 		return this.topPageService.findByCategory(dto.firstCategory);
 	}
 
-	// @Get('textSearch/:text')
-	// async textSearch(@Param('text') text: string) {
-	// 	return this.topPageService.findByText(text);
-	// }
+	@Get('textSearch/:text')
+	async textSearch(@Param('text') text: string) {
+		return this.topPageService.findByText(text);
+	}
 
 	// @Cron(CronExpression.EVERY_DAY_AT_MIDNIGHT)
 	// async test() {
