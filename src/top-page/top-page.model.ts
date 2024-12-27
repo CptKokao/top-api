@@ -66,6 +66,9 @@ export class TopPageModel {
 
 	@Prop([String])
 	tags: string[];
+
+	@Prop(Date)
+	updatedAt: Date;
 }
 
 export type TopPageDocument = HydratedDocument<TopPageModel>;

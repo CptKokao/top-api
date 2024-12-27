@@ -10,6 +10,7 @@ import { UsersModule } from './users/users.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { getMongoConfig } from './configs/mongo.config';
 import { FilesModule } from './files/files.module';
+import { SitemapModule } from './sitemap/sitemap.module';
 
 @Module({
 	imports: [
@@ -27,6 +28,7 @@ import { FilesModule } from './files/files.module';
 		ReviewModule,
 		UsersModule,
 		FilesModule,
+		SitemapModule,
 	],
 	controllers: [AppController],
 	providers: [AppService],
